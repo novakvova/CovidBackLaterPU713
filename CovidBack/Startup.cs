@@ -54,6 +54,7 @@ namespace CovidBack
                 RequestPath=new PathString("/android")
             });
             app.UseMvc();
+            DBSeeder.SeedData(app.ApplicationServices, env, Configuration);
         }
     }
 }
