@@ -20,7 +20,7 @@ namespace CovidBack.Enities
                 //var manager = scope.ServiceProvider.GetRequiredService<UserManager<DbUser>>();
                 //var managerRole = scope.ServiceProvider.GetRequiredService<RoleManager<DbRole>>();
                 var context = scope.ServiceProvider.GetRequiredService<ApplicationDBContext>();
-                //  SeedUsers(manager, managerRole);
+                SeedProducts(context);
             }
         }
         private static void SeedProducts(ApplicationDBContext dBContext)
@@ -40,7 +40,14 @@ namespace CovidBack.Enities
                 new Product {Title="Iphone",Price="1111",Url="10.jpg" },
                 new Product {Title="Processor",Price="4444",Url="11.jpg" },
             };
-
+            for (int i = 0; i < products.Count; i++)
+            {
+                if (dBContext.Products.SingleOrDefault(r => r.Title == products[i].Title) == null)
+                {
+                    dBContext.Products.Add(products[i]);
+                    dBContext.SaveChanges();
+                }
+            }
 
 
         }
