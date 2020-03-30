@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CovidBack.BLL.Abstract;
+using CovidBack.BLL.Services;
 using CovidBack.Enities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -39,7 +41,7 @@ namespace CovidBack
             services.AddIdentity<DbUser, DbRole>(options => options.Stores.MaxLengthForKeys = 128)
                .AddEntityFrameworkStores<ApplicationDBContext>()
                .AddDefaultTokenProviders();
-
+            services.AddTransient<IJWTTokenService, JWTTokenService>();
             var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetValue<string>("SecretPhrase")));
 
             services.Configure<IdentityOptions>(options =>
