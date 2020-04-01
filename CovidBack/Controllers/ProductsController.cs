@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using CovidBack.DTO;
 using CovidBack.Enities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -13,6 +14,7 @@ namespace CovidBack.Controllers
 {
     [Route("api/[controller]")]
     [Produces("application/json")]
+    [Authorize]
     public class ProductsController : ControllerBase
     {
         private readonly ApplicationDBContext _context;

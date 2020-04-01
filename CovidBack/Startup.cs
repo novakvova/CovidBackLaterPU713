@@ -85,6 +85,9 @@ namespace CovidBack
                 app.UseDeveloperExceptionPage();
             }
             app.UseStaticFiles();
+
+            app.UseAuthentication();
+
             string serverPath = env.ContentRootPath;
             string folderImage = "images";
             serverPath = Path.Combine(serverPath, folderImage);
