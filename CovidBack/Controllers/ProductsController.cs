@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using CovidBack.DTO;
 using CovidBack.Enities;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -20,11 +22,14 @@ namespace CovidBack.Controllers
     {
         private readonly ApplicationDBContext _context;
         private readonly IConfiguration _configuration;
+        private readonly IHostingEnvironment _env;
         public ProductsController(ApplicationDBContext context,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            IHostingEnvironment env)
         {
             _context = context;
             _configuration = configuration;
+            _env = env;
         }
         public IActionResult GetAll()
         {
@@ -103,16 +108,27 @@ namespace CovidBack.Controllers
                     invalid = "Не валідна модель"
                 });
             }
-            Random r = new Random();
+            var imageName = Path.GetRandomFileName() + ".jpg";
+            string savePath = _env.ContentRootPath;
+            string folderImage = "images";
+            savePath = Path.Combine(savePath, folderImage);
+            savePath = Path.Combine(savePath, imageName);
+            using (FileStream fs = new FileStream(savePath, FileMode.Create))
+            {
+                byte[] byteBuffer = Convert.FromBase64String(model.imageBase64);
+                fs.Write(byteBuffer);
+            }
+
             //var faker = new Faker();
             Product product = new Product
             {
                 Title = model.title,
-                Url = r.Next(1, 10).ToString() + ".jpg",
+                Url = imageName,
                 Price = model.price
             };
             _context.Products.Add(product);
             _context.SaveChanges();
+
             return Ok(
             new
             {
