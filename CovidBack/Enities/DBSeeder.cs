@@ -20,7 +20,7 @@ namespace CovidBack.Enities
                 var manager = scope.ServiceProvider.GetRequiredService<UserManager<DbUser>>();
                 var managerRole = scope.ServiceProvider.GetRequiredService<RoleManager<DbRole>>();
                 var context = scope.ServiceProvider.GetRequiredService<ApplicationDBContext>();
-                SeedProducts(context);
+                //SeedProducts(context);
                 SeedUsers(manager, managerRole);
             }
         }

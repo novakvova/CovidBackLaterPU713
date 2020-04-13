@@ -8,6 +8,7 @@ namespace CovidBack.DTO
 {
     public class ProductDTO
     {
+        public int id { get; set; }
         public string title { get; set; }
         public string url { get; set; }
         public string price { get; set; }
@@ -15,11 +16,11 @@ namespace CovidBack.DTO
 
     public class ProductCreateDTO
     {
-        [Required]
+        [Required(ErrorMessage ="Вкажіть назву")]
         public string title { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Вкажіть ціну")]
         public string price { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Вкажіть фото")]
         public string imageBase64 { get; set; }
     }
     public class ProductEditDTO
@@ -30,6 +31,9 @@ namespace CovidBack.DTO
         public string title { get; set; }
         [Required]
         public string price { get; set; }
+        [Required]
+        public string url { get; set; }
+        public string imageBase64 { get; set; }
     }
 
 }
