@@ -9,5 +9,6 @@ namespace CovidBack.Enities
     public class DbUser : IdentityUser<long>
     {
         public ICollection<DbUserRole> UserRoles { get; set; }
+        public virtual UserProfile UserProfile { get; set; }
     }
 }
