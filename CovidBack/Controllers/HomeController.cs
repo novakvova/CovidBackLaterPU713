@@ -66,7 +66,8 @@ namespace CovidBack.Controllers
                     u.Id,
                     u.Email,
                     Image = $"{domain}android/{u.UserProfile.Image}",
-                    Name = $"{u.UserProfile.Lastname} {u.UserProfile.Firstname}",
+                    u.UserProfile.Lastname,
+                    u.UserProfile.Firstname,
                     u.UserProfile.BirthDate,
                     u.UserProfile.Address,
                     u.UserProfile.Phone
