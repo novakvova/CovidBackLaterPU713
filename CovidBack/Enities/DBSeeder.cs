@@ -73,7 +73,9 @@ namespace CovidBack.Enities
                     Phone="+38(097)234-11-34",
                     Firstname="Іван",
                     Lastname="Подкачкін",
-                    Image="admin.jpg"
+                    Image="admin.jpg",
+                    BirthDate="12 травня 1998",
+                    Address="м. Рівне Пішкіна буд. 12a"
                 };
                 var user = new DbUser
                 {

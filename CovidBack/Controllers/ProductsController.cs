@@ -83,6 +83,7 @@ namespace CovidBack.Controllers
                 });
             }
         }
+        
         [HttpPost("edit")]
         [Authorize(Roles = "Admin")]
         public IActionResult Edit([FromBody]ProductEditDTO model)

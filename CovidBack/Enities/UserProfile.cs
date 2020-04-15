@@ -17,9 +17,13 @@ namespace CovidBack.Enities
 
         public string Phone { get; set; }
 
+        public string BirthDate { get; set; }
+
         public string Firstname { get; set; }
 
         public string Lastname  { get; set; }
+
+        public string Address { get; set; }
 
         public virtual DbUser User { get; set; }
 
